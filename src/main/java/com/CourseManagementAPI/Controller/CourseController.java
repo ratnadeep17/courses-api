@@ -1,6 +1,5 @@
 package com.CourseManagementAPI.Controller;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,35 +14,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.CourseManagementAPI.Entity.Course;
+import com.CourseManagementAPI.ResponseDto.ApiResponseDto;
 import com.CourseManagementAPI.Service.CourseService;
 
 @RestController
-@RequestMapping("/api/courses")
+@RequestMapping("/api/")
 public class CourseController {
 
-    @Autowired
-    private CourseService courseService;
+	@Autowired
+	private CourseService courseService;
 
-    @GetMapping
-    public List<Course> getAllCourses() {
-        return courseService.getAllCourses();
-    }
+	@Autowired
+	ApiResponseDto apiResponseDto;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Course> getCourseById(@PathVariable Long id) {
-        Optional<Course> course = courseService.getCourseById(id);
-        return course.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
+	@PostMapping("courses")
+	public ApiResponseDto createCourse(@RequestBody Course course) {
+		return courseService.createCourse(course);
+	}
 
-    @PostMapping("/create")
-    public ResponseEntity<Course> createCourse(@RequestBody Course course) {
-        Course createdCourse = courseService.createCourse(course);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdCourse);
-    }
+	@GetMapping("courses")
+	public ApiResponseDto getAllCourses() {
+		return courseService.getAllCourses();
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
-        courseService.deleteCourse(id);
-        return ResponseEntity.noContent().build();
-    }
+	@GetMapping("courses/{courseId}")
+	public ApiResponseDto getCourseById(@PathVariable Long courseId) {
+		return courseService.getCourseById(courseId);
+
+	}
+
+	@DeleteMapping("courses/{id}")
+	public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
+		courseService.deleteCourse(id);
+		return ResponseEntity.noContent().build();
+	}
 }

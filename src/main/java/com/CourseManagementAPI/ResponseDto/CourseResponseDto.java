@@ -14,7 +14,7 @@ import lombok.ToString;
 @Component
 public class CourseResponseDto {
 
-	private Long id;
+	private Long courseId;
 
 	private String title;
 
