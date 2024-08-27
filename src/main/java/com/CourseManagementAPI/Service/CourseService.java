@@ -21,9 +21,6 @@ public class CourseService {
 	@Autowired
 	ApiResponseDto apiResponseDto;
 
-//	@Autowired
-//	private ModelMapper modelMapper;
-
 	// CREATE A COURSE
 	public ApiResponseDto createCourse(Course course) {
 		Optional<Course> courseCode = courseRepository.findByCourseCode(course.getCourseCode());
@@ -36,8 +33,6 @@ public class CourseService {
 		}
 
 		Course courseEntity = courseRepository.save(course);
-		// CourseResponseDto courseResponseDto = modelMapper.map(courseEntity,
-		// CourseResponseDto.class);
 		apiResponseDto.setData(courseEntity);
 		apiResponseDto.setStatus("Success");
 		apiResponseDto.setStatusCode(200);
