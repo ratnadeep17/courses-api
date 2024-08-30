@@ -41,4 +41,9 @@ public class CourseInstanceController {
 			@PathVariable Long courseId) {
 		return courseInstanceService.deleteCourseInstance(year,semester,courseId);
 	}
+	
+	@GetMapping("instances/{instanceId}")
+	public ApiResponseDto getInstanceById(@PathVariable Long instanceId) {
+		return courseInstanceService.getInstanceById(instanceId);
+	}
 }

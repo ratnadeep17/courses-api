@@ -138,4 +138,21 @@ public class CourseInstanceService {
 		apiResponseDto.setStatusMessage("Course Instances Deleted Successfully");
 		return apiResponseDto;
 	}
+	
+	public ApiResponseDto getInstanceById(Long instanceId) {
+		Optional<CourseInstance> courseInstance = courseInstanceRepository.findById(instanceId);
+		if(courseInstance.isEmpty()) {
+			apiResponseDto.setData(null);
+			apiResponseDto.setStatus("Failed");
+			apiResponseDto.setStatusCode(400);
+			apiResponseDto.setStatusMessage("Course Instance Not Found");
+			return apiResponseDto;
+		}
+		
+		apiResponseDto.setData(courseInstance);
+		apiResponseDto.setStatus("Success");
+		apiResponseDto.setStatusCode(200);
+		apiResponseDto.setStatusMessage("Course Instance Found");
+		return apiResponseDto;
+	}
 }
