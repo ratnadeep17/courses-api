@@ -41,6 +41,7 @@ spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.format_sql=true
+server.port=8081
 
 ## 1. Running Locally
 
@@ -75,7 +76,7 @@ To run the application using Docker:
 
 2. **Run the Docker container:**
     ```bash
-    docker run -d -p 8080:8080 --name course-management-api your-dockerhub-username/course-management-api
+    docker run -d -p 8081:8080 --name course-management-api your-dockerhub-username/course-management-api
     ```
 
    The API will be accessible at `http://localhost:8080`.
